@@ -71,3 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 #formulário-de-cadastro
 # cadastronew
 # cadastronew
+#cadastro_new2

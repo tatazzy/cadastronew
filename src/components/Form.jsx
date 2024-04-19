@@ -1,34 +1,46 @@
-
-
 // Bibliotecas incluídas via terminal
 import { useForm } from "react-hook-form";
-import validator from 'validator';
-import InputMask from 'react-input-mask';
+import validator from "validator";
+import InputMask from "react-input-mask";
+import { Header } from "./Header/index";
+import { cadastrarPessoa } from "../api/cadastrar-pessoa";
 
-const Form = () => {
+export const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm()
+  } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data) // Teste de saída via console dos dados incluídos 
+  const onSubmit = async (data) => {
+    console.log(data); // Teste de saída via console dos dados incluídos
 
     // Condição que irá analisar se os dados foram validados e estão sendo enviados (caso seja verdadeiro, retornará um alerta para o usuário confirmando o envio)
-    if(data != null){
-      alert("Cadastro efetuado com sucesso!");
+    if (data == null) {
+      alert("Cadastro incompleto!");
+      return;
     }
+
+    const response = await cadastrarPessoa({
+      name: data.name,
+      email: data.email,
+      telephone: data.telephone,
+      adress: data.adress,
+      dateOfBirth: data.dateOfBirth,
+      gender: data.gender,
+    });
+
+    alert("Cadastro efetuado com sucesso!");
   };
 
-  // "Variáveis" para armazenar os valores a cada mudança do usuário 
-  const watchEmail = watch("email")
-  const watchTelephone = watch("telephone")
+  // "Variáveis" para armazenar os valores a cada mudança do usuário
+  const watchEmail = watch("email");
+  const watchTelephone = watch("telephone");
 
   return (
-
     <div className="app-container">
+      <Header />
       <h1 className="header">Cadastrar</h1>
       <div className="form-group">
         <label>Nome completo</label>
@@ -36,17 +48,23 @@ const Form = () => {
           className={errors?.name && "input-error"}
           type="text"
           placeholder="Seu nome completo"
-          {...register('name', {
+          {...register("name", {
             required: true,
-            minLength: 15
+            minLength: 15,
           })}
         />
 
-        {errors?.name?.type == 'required' && 
-          <p className="error-message">O preenchimento do nome completo é obrigatório</p>}
+        {errors?.name?.type == "required" && (
+          <p className="error-message">
+            O preenchimento do nome completo é obrigatório
+          </p>
+        )}
 
-        {errors?.name?.type == 'minLength' && 
-          <p className="error-message">O nome completo precisa ter no mínimo 15 caracteres</p>}
+        {errors?.name?.type == "minLength" && (
+          <p className="error-message">
+            O nome completo precisa ter no mínimo 15 caracteres
+          </p>
+        )}
       </div>
 
       <div className="form-group">
@@ -55,15 +73,19 @@ const Form = () => {
           className={errors?.email && "input-error"}
           type="email"
           placeholder="Seu e-mail"
-          {...register('email', {
+          {...register("email", {
             required: true,
-            validate: (value) => validator.isEmail(value)
+            validate: (value) => validator.isEmail(value),
           })}
         />
-        {errors?.email?.type == 'required' && 
-          <p className="error-message">O preenchimento do e-mail é obrigatório</p>}
-        {errors?.email?.type == 'validate' && 
-          <p className="error-message">O e-mail é inválido</p>}
+        {errors?.email?.type == "required" && (
+          <p className="error-message">
+            O preenchimento do e-mail é obrigatório
+          </p>
+        )}
+        {errors?.email?.type == "validate" && (
+          <p className="error-message">O e-mail é inválido</p>
+        )}
       </div>
 
       <div className="form-group">
@@ -72,16 +94,23 @@ const Form = () => {
           className={errors?.emailConfirmation && "input-error"}
           type="emailConfirmation"
           placeholder="Confirme seu e-mail"
-          {...register('emailConfirmation', {
+          {...register("emailConfirmation", {
             required: true,
-            validate: (value) => validator.isEmail(value) && value == watchEmail
+            validate: (value) =>
+              validator.isEmail(value) && value == watchEmail,
           })}
         />
-        {errors?.emailConfirmation?.type == 'required' &&
-          <p className="error-message">O preenchimento da confirmação do e-mail é obrigatório</p>}
+        {errors?.emailConfirmation?.type == "required" && (
+          <p className="error-message">
+            O preenchimento da confirmação do e-mail é obrigatório
+          </p>
+        )}
 
-        {errors?.emailConfirmation?.type == 'validate' &&
-          <p className="error-message">O e-mail é inválido e precisa ser igual ao e-mail informado acima</p>}
+        {errors?.emailConfirmation?.type == "validate" && (
+          <p className="error-message">
+            O e-mail é inválido e precisa ser igual ao e-mail informado acima
+          </p>
+        )}
       </div>
 
       <div className="form-group">
@@ -90,19 +119,22 @@ const Form = () => {
           className={errors?.telephone && "input-error"}
           mask="(99) 99999-9999" // Defina a máscara do telefone aqui (utilizando a biblioteca: react-input-mask para formatação)
           placeholder="Telefone"
-          {...register('telephone',
-            {
-              required: true,
-              minLength: 10
-            })}
+          {...register("telephone", {
+            required: true,
+            minLength: 10,
+          })}
         />
 
-        {errors?.telephone?.type == 'required' && (
-          <p className="error-message">O preenchimento do telefone é obrigatório </p>
+        {errors?.telephone?.type == "required" && (
+          <p className="error-message">
+            O preenchimento do telefone é obrigatório{" "}
+          </p>
         )}
 
-        {errors?.telephone?.type == 'minLength' && (
-          <p className="error-message">O número de telefone precisa ter no mínimo 10 dígitos</p>
+        {errors?.telephone?.type == "minLength" && (
+          <p className="error-message">
+            O número de telefone precisa ter no mínimo 10 dígitos
+          </p>
         )}
       </div>
 
@@ -112,24 +144,27 @@ const Form = () => {
           className={errors?.telephoneConfirmation && "input-error"}
           mask="(99) 99999-9999"
           placeholder="Confirme seu telefone"
-          {...register('telephoneConfirmation',
-            {
-              required: true,
-              validate: (value) => value == watchTelephone,
-              minLength: 10
-            })}
+          {...register("telephoneConfirmation", {
+            required: true,
+            validate: (value) => value == watchTelephone,
+            minLength: 10,
+          })}
         />
 
-        {errors?.telephoneConfirmation?.type == 'required' && (
-          <p className="error-message">O preenchimento do telefone de confirmação é obrigatório </p>
+        {errors?.telephoneConfirmation?.type == "required" && (
+          <p className="error-message">
+            O preenchimento do telefone de confirmação é obrigatório{" "}
+          </p>
         )}
 
-        {errors?.telephoneConfirmation?.type == 'validate' && (
+        {errors?.telephoneConfirmation?.type == "validate" && (
           <p className="error-message">Os telefones precisam ser iguais</p>
         )}
 
-        {errors?.telephoneConfirmation?.type == 'minLength' && (
-          <p className="error-message">O número de telefone precisa ter no mínimo 10 dígitos</p>
+        {errors?.telephoneConfirmation?.type == "minLength" && (
+          <p className="error-message">
+            O número de telefone precisa ter no mínimo 10 dígitos
+          </p>
         )}
       </div>
 
@@ -139,19 +174,22 @@ const Form = () => {
           className={errors?.adress && "input-error"}
           type="adress"
           placeholder="Endereço"
-          {...register('adress',
-            {
-              required: true,
-              minLength: 10
-            })}
+          {...register("adress", {
+            required: true,
+            minLength: 10,
+          })}
         />
 
-        {errors?.adress?.type == 'required' && (
-          <p className="error-message">O preenchimento do endereço é obrigatório </p>
+        {errors?.adress?.type == "required" && (
+          <p className="error-message">
+            O preenchimento do endereço é obrigatório{" "}
+          </p>
         )}
 
-        {errors?.adress?.type == 'minLength' && (
-          <p className="error-message">O endereço precisa ter no mínimo de 10 caracteres</p>
+        {errors?.adress?.type == "minLength" && (
+          <p className="error-message">
+            O endereço precisa ter no mínimo de 10 caracteres
+          </p>
         )}
       </div>
 
@@ -161,24 +199,24 @@ const Form = () => {
           className={errors?.dateOfBirth && "input-error"}
           type="date"
           placeholder="Digite a data do seu nascimento"
-          {...register('dateOfBirth',
-            {
-              required: true,
-            })}
+          {...register("dateOfBirth", {
+            required: true,
+          })}
         />
-        {errors?.dateOfBirth?.type == 'required' && (
-          <p className="error-message">O preenchimento da data de nascimento é obrigatório </p>
+        {errors?.dateOfBirth?.type == "required" && (
+          <p className="error-message">
+            O preenchimento da data de nascimento é obrigatório{" "}
+          </p>
         )}
-
       </div>
 
       <div className="form-group">
         <label>Gênero</label>
         <select
-          {...register('gender', {
+          {...register("gender", {
             validate: (value) => {
-              return value != "0"
-            }
+              return value != "0";
+            },
           })}
           className={errors?.gender && "input-error"}
         >
@@ -188,7 +226,7 @@ const Form = () => {
           <option value="other">Outra</option>
         </select>
 
-        {errors?.gender?.type == 'validate' && (
+        {errors?.gender?.type == "validate" && (
           <p className="error-message">Selecione um gênero</p>
         )}
       </div>
@@ -198,13 +236,15 @@ const Form = () => {
           <input
             type="checkbox"
             name="privacy-policy"
-            {...register('privacyTerms', { required: true })}
+            {...register("privacyTerms", { required: true })}
           />
           <label>Eu aceito os termos de privacidade.</label>
         </div>
 
-        {errors?.privacyTerms?.type == 'required' && (
-          <p className="error-message">Selecione os termos de privacidade para continuar</p>
+        {errors?.privacyTerms?.type == "required" && (
+          <p className="error-message">
+            Selecione os termos de privacidade para continuar
+          </p>
         )}
       </div>
 
@@ -214,5 +254,3 @@ const Form = () => {
     </div>
   );
 };
-
-export default Form;
