@@ -72,3 +72,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # cadastronew
 # cadastronew
 #cadastro_new2
+# cadastro_new2
