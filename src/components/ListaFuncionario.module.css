@@ -1,0 +1,97 @@
+.container {
+  width: 75%;
+  padding: 20px;
+  background-color: #333; 
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  margin: 50px auto;
+  display: block;
+  height: 100%;
+}
+
+.title {
+  background-color: salmon; 
+  color: white; 
+  padding: 20px;
+  margin: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.button {
+  background-color: salmon; 
+  color: white; 
+  border: none;
+  padding: 10px 15px; 
+  margin-bottom: 5px; 
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.input {
+  padding: 8px;
+  font-size: 16px;
+  width:100%;
+  margin-bottom: 10px;
+}
+
+.ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.li {
+  margin-bottom: 5px; 
+  padding: 10px;
+  background-color: #555; 
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.li:hover {
+  background-color: #777; 
+}
+
+.details {
+  margin-top: 10px;
+  background-color: #333; 
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+  padding: 10px;
+  color: white; 
+}
+
+.people-list {
+  max-height: 480px; 
+  overflow-y: auto;
+  color: white; 
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.button-container button {
+  background-color: transparent;
+  color: white; 
+  border: 2px solid salmon;
+  padding: 8px 12px; 
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.button-container button:hover,
+.button-container button.active {
+  background-color: salmon; 
+  color: black; 
+}
+
+.top-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
