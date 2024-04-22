@@ -28,7 +28,7 @@ export const Form = () => {
       telefone: data.telephone,
       dataNasc: data.dateOfBirth,
       genero: data.gender,
-      cargo: "Desenvolvedor",
+      cargo: data.occupation,
       idade: 20,
     });
     console.log(response);
@@ -231,7 +231,26 @@ export const Form = () => {
           <p className="error-message">Selecione um gênero</p>
         )}
       </div>
-
+      <div className="form-group">
+        <label>Cargo</label>
+        <select
+          {...register("occupation", {
+            validate: (value) => {
+              return value != "0";
+            },
+          })}
+          className={errors?.occupation && "input-error"}>
+          <option value="0">Selecione seu cargo...</option>
+          <option value="Desenvolvedor">Desenvolvedor</option>
+          <option value="Designer">Designer</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Analista">Analista</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+        {errors?.occupation?.type == "validate" && (
+          <p className="error-message">Selecione um cargo</p>
+        )}
+      </div>
       <div className="form-group">
         <div className="checkbox-group">
           <input
