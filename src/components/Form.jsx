@@ -21,6 +21,19 @@ export const Form = () => {
       alert("Cadastro incompleto!");
       return;
     }
+    
+    function calcularIdade(dataNasc) {
+      const hoje = new Date();
+      const nascimento = new Date(dataNasc);
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const mesAtual = hoje.getMonth() + 1;
+      const diaAtual = hoje.getDate();
+      if (mesAtual < nascimento.getMonth() + 1 || (mesAtual === nascimento.getMonth() + 1 && diaAtual < nascimento.getDate())) {
+        idade--;
+      }
+      return idade;
+    }
+    const idade = calcularIdade(data.dateOfBirth);
 
     const response = await cadastrarPessoa({
       nome: data.name,
@@ -29,7 +42,7 @@ export const Form = () => {
       dataNasc: data.dateOfBirth,
       genero: data.gender,
       cargo: data.occupation,
-      idade: 20,
+      idade: idade,
     });
     console.log(response);
 
