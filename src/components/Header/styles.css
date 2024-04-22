@@ -1,8 +1,12 @@
+
 .container { 
-    background: white;
+    background: rgb(6, 10, 35);
     width: 100%;
     height: 48px;
     display: flex;
+    justify-content: space-between; /* Adicionado para separar os itens na barra de navegação */
+        align-items: center;
+        padding: 0 20px; /* Adicionado espaçamento interno para separar os itens da borda */
 }
 
 .nav {
@@ -14,7 +18,20 @@
 
 .nav-link {
     display: flex;
-    color: black;
+    color: rgb(36, 53, 164);
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
+    margin: 0 10px; /* Adicionado espaçamento horizontal entre os links */
+    margin: auto; /* Move os links de cadastro para a direita */
+    text-decoration: none; /* Removido o sublinhado padrão dos links */
+    
 }
+
+
+
+
+
+    
+
+
+

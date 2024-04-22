@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import validator from 'validator';
-import {Header} from './Header/index'
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import validator from "validator";
+import { Header } from "./Header/index";
 
 export const FormFuncionario = () => {
   const {
@@ -19,25 +19,25 @@ export const FormFuncionario = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    console.log('Documentos:', documentos);
-    alert('Cadastro efetuado com sucesso!');
+    console.log("Documentos:", documentos);
+    alert("Cadastro efetuado com sucesso!");
   };
 
   return (
     <div className="app-container">
-       <Header/>
+      <Header />
       <h1 className="header">Cadastrar</h1>
       <div className="form-group">
         <label>Pessoa</label>
         <input
-          className={errors?.pessoa && 'input-error'}
+          className={errors?.pessoa && "input-error"}
           type="text"
           placeholder="Seu nome completo"
-          {...register('pessoa', {
-            required: 'O preenchimento de pessoa é obrigatório',
+          {...register("pessoa", {
+            required: "O preenchimento de pessoa é obrigatório",
             minLength: {
               value: 15,
-              message: 'O nome completo precisa ter no mínimo 15 caracteres',
+              message: "O nome completo precisa ter no mínimo 15 caracteres",
             },
           })}
         />
@@ -49,13 +49,13 @@ export const FormFuncionario = () => {
       <div className="form-group">
         <label>Cargo</label>
         <input
-          className={errors?.cargo && 'input-error'}
+          className={errors?.cargo && "input-error"}
           type="text"
           placeholder="Seu cargo"
-          {...register('cargo', {
-            required: 'O preenchimento do cargo é obrigatório',
+          {...register("cargo", {
+            required: "O preenchimento do cargo é obrigatório",
             validate: (value) =>
-              validator.isAlpha(value) || 'O cargo é inválido',
+              validator.isAlpha(value) || "O cargo é inválido",
           })}
         />
         {errors?.cargo && (
@@ -69,7 +69,9 @@ export const FormFuncionario = () => {
           type="file"
           onChange={handleFileChange}
           multiple
-          {...register('documentos', { required: 'É obrigatório selecionar um documento' })}
+          {...register("documentos", {
+            required: "É obrigatório selecionar um documento",
+          })}
         />
         {errors?.documentos && (
           <p className="error-message">{errors.documentos.message}</p>

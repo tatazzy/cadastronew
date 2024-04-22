@@ -23,13 +23,15 @@ export const Form = () => {
     }
 
     const response = await cadastrarPessoa({
-      name: data.name,
+      nome: data.name,
       email: data.email,
-      telephone: data.telephone,
-      adress: data.adress,
-      dateOfBirth: data.dateOfBirth,
-      gender: data.gender,
+      telefone: data.telephone,
+      dataNasc: data.dateOfBirth,
+      genero: data.gender,
+      cargo: "Desenvolvedor",
+      idade: 20,
     });
+    console.log(response);
 
     alert("Cadastro efetuado com sucesso!");
   };
@@ -221,9 +223,8 @@ export const Form = () => {
           className={errors?.gender && "input-error"}
         >
           <option value="0">Selecione seu gênero...</option>
-          <option value="woman">Feminino</option>
-          <option value="man">Masculino</option>
-          <option value="other">Outra</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Masculino">Masculino</option>
         </select>
 
         {errors?.gender?.type == "validate" && (

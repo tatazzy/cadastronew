@@ -1,19 +1,23 @@
 import { apiClient } from ".";
 
 export const cadastrarPessoa = async ({
-  name,
+  nome,
   email,
-  telephone,
-  adress,
-  dateOfBirth,
-  gender,
+  telefone,
+  dataNasc,
+  genero,
+  cargo,
+  idade,
 }) => {
-  await apiClient.post("/cadastro-pessoa", {
-    name,
-    email,
-    telephone,
-    adress,
-    dateOfBirth,
-    gender,
+  await apiClient.post("/Colaborador", {
+    dados: {
+      nome,
+      email,
+      telefone,
+      dataNasc,
+      genero,
+      cargo,
+      idade,
+    },
   });
 };
