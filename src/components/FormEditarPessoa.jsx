@@ -135,28 +135,7 @@ export const FormEditarPessoa = () => {
         )}
       </div>
 
-      <div className="form-group">
-        <label>Endereço</label>
-        <input
-          className={errors?.adress && "input-error"}
-          type="adress"
-          placeholder="Endereço"
-          {...register('adress',
-            {
-              required: true,
-              minLength: 10
-            })}
-        />
-
-        {errors?.adress?.type == 'required' && (
-          <p className="error-message">O preenchimento do endereço é obrigatório </p>
-        )}
-
-        {errors?.adress?.type == 'minLength' && (
-          <p className="error-message">O endereço precisa ter no mínimo de 10 caracteres</p>
-        )}
-      </div>
-
+      
       <div className="form-group">
         <label>Data de nascimento</label>
         <input

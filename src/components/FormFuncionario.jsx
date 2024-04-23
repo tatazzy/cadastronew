@@ -48,18 +48,22 @@ export const FormFuncionario = () => {
 
       <div className="form-group">
         <label>Cargo</label>
-        <input
-          className={errors?.cargo && "input-error"}
-          type="text"
-          placeholder="Seu cargo"
-          {...register("cargo", {
-            required: "O preenchimento do cargo é obrigatório",
-            validate: (value) =>
-              validator.isAlpha(value) || "O cargo é inválido",
+        <select
+          {...register("occupation", {
+            validate: (value) => {
+              return value != "0";
+            },
           })}
-        />
-        {errors?.cargo && (
-          <p className="error-message">{errors.cargo.message}</p>
+          className={errors?.occupation && "input-error"}>
+          <option value="0">Selecione seu cargo...</option>
+          <option value="Desenvolvedor">Desenvolvedor</option>
+          <option value="Designer">Designer</option>
+          <option value="Gerente">Gerente</option>
+          <option value="Analista">Analista</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+        {errors?.occupation?.type == "validate" && (
+          <p className="error-message">Selecione um cargo</p>
         )}
       </div>
 

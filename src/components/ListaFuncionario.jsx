@@ -124,6 +124,10 @@ export function ListaFuncionario() {
                       {console.log("person", person)}
                       <p>Email: {person.email}</p>
                       <p>Nome: {person.nome}</p>
+                      <p>Telefone: {person.telefone}</p>
+                      <p>Gênero: {person.genero}</p>
+                      <p>Idade: {person.idade}</p>
+                      <p>Cargo: {person.cargo}</p>
                     </div>
                   )}
                 </li>
@@ -139,6 +143,11 @@ export function ListaFuncionario() {
                     <div className={styles["details"]}>
                       <p>Email: {person.email}</p>
                       <p>Nome: {person.nome}</p>
+                      <p>Telefone: {person.telefone}</p>
+                      <p>Gênero: {person.genero}</p>
+                      <p>Idade: {person.idade}</p>
+                      <p>Cargo: {person.cargo}</p>
+
                     </div>
                   )}
                 </li>

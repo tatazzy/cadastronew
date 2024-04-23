@@ -18,7 +18,7 @@
 
 .nav-link {
     display: flex;
-    color: rgb(36, 53, 164);
+    color: rgb(255, 255, 255);
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
     margin: 0 10px; /* Adicionado espaçamento horizontal entre os links */
