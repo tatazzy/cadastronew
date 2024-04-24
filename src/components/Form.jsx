@@ -21,7 +21,7 @@ export const Form = () => {
       alert("Cadastro incompleto!");
       return;
     }
-    
+
     function calcularIdade(dataNasc) {
       const hoje = new Date();
       const nascimento = new Date(dataNasc);
@@ -47,6 +47,7 @@ export const Form = () => {
     console.log(response);
 
     alert("Cadastro efetuado com sucesso!");
+    window.location.reload();
   };
 
   // "Variáveis" para armazenar os valores a cada mudança do usuário

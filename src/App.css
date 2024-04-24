@@ -9,12 +9,13 @@ body,
 #root {
   height: 100%;
   width: 100%;
+  background: #000000;
   font-family: "Poppins", sans-serif;
 }
 
 .app-container {
   background: #000000;
-  min-height: 158vh; /* Define a altura mínima da viewport */
+  min-height: auto; /* Define a altura mínima da viewport */
   display: flex;
   flex-direction: column;
   overflow-x: hidden; /* Oculta a barra de rolagem horizontal */

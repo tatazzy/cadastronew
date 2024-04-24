@@ -23,8 +23,10 @@ export const FormFuncionario = () => {
     try {
       const response = await cadastrarFuncionario(formData);
       const resposta = response.data;
-      if (resposta.sucesso)
+      if (resposta.sucesso) {
         alert("Cadastro efetuado com sucesso!");
+        window.location.reload();
+      }
       else {
         alert(resposta.mensagem);
       }
