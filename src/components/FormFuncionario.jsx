@@ -20,12 +20,16 @@ export const FormFuncionario = () => {
     formData.append("idColaborador", data.pessoa);
     formData.append("arquivo", data.documentos[0]);
 
-    const response = await cadastrarFuncionario(formData);
-    const resposta = response.data;
-    if (resposta.sucesso)
-      alert("Cadastro efetuado com sucesso!");
-    else {
-      alert(data.mensagem);
+    try {
+      const response = await cadastrarFuncionario(formData);
+      const resposta = response.data;
+      if (resposta.sucesso)
+        alert("Cadastro efetuado com sucesso!");
+      else {
+        alert(resposta.mensagem);
+      }
+    } catch (error) {
+      alert("Erro ao enviar a requisição para o servidor!");
     }
   }
   /*
