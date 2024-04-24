@@ -97,6 +97,7 @@ export const FormFuncionario = () => {
           {...register("documentos", {
             required: "É obrigatório selecionar um documento",
           })}
+          accept=".pdf"
         />
         {errors?.documentos && (
           <p className="error-message">{errors.documentos.message}</p>
