@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import { Header } from "./Header/index";
@@ -9,10 +9,22 @@ export const FormFuncionario = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
+    setValue, // Adicionando setValue para atualizar o valor do campo "pessoa"
   } = useForm();
 
-  //const [documentos, setDocumentos] = useState([]);
+  const [colaboradores, setColaboradores] = useState([]); // Estado para armazenar os colaboradores
+
+  useEffect(() => {
+    // Aqui você pode fazer uma chamada à API para obter a lista de colaboradores
+    // Por enquanto, vou apenas simular uma lista de colaboradores
+    const mockColaboradores = [
+      { id: 1, nome: "Colaborador 1" },
+      { id: 2, nome: "Colaborador 2" },
+      { id: 3, nome: "Colaborador 3" }
+    ];
+    setColaboradores(mockColaboradores);
+  }, []);
+
   const onSubmit = async (data) => {
     console.log(data);
     const formData = new FormData();
@@ -24,49 +36,34 @@ export const FormFuncionario = () => {
       const response = await cadastrarFuncionario(formData);
       const resposta = response.data;
       if (resposta.sucesso) {
+        // Atualizar o valor do campo "pessoa" com o ID da pessoa cadastrada
+        setValue("pessoa", resposta.idPessoa);
         alert("Cadastro efetuado com sucesso!");
         window.location.reload();
-      }
-      else {
+      } else {
         alert(resposta.mensagem);
       }
     } catch (error) {
       alert("Erro ao enviar a requisição para o servidor!");
     }
-  }
-  /*
-    const handleFileChange = (event) => {
-      const files = event.target.files;
-      setDocumentos(files);
-    };
-  
-    const onSubmit = (data) => {
-      console.log(data);
-      console.log("Documentos:", documentos);
-      alert("Cadastro efetuado com sucesso!");
-    };
-    */
+  };
 
   return (
     <div className="app-container">
       <Header />
       <h1 className="header">Cadastrar</h1>
       <div className="form-group">
-        <label>Pessoa</label>
-        <input
-          className={errors?.pessoa && "input-error"}
-          type="text"
-          placeholder="Seu nome completo"
+        <label>Selecione o colaborador</label>
+        <select
           {...register("pessoa", {
-            required: "O preenchimento de pessoa é obrigatório",
-            /*
-            minLength: {
-              value: 15,
-              message: "O nome completo precisa ter no mínimo 15 caracteres",
-            },
-            */
+            required: "Selecione um colaborador",
           })}
-        />
+        >
+          <option value="">Selecione...</option>
+          {colaboradores.map(colaborador => (
+            <option key={colaborador.id} value={colaborador.id}>{colaborador.nome}</option>
+          ))}
+        </select>
         {errors?.pessoa && (
           <p className="error-message">{errors.pessoa.message}</p>
         )}
@@ -80,7 +77,8 @@ export const FormFuncionario = () => {
               return value != "0";
             },
           })}
-          className={errors?.occupation && "input-error"}>
+          className={errors?.occupation && "input-error"}
+        >
           <option value="0">Selecione o tipo de documento...</option>
           <option value="Estudante">Estudante</option>
           <option value="Pessoal">Pessoal</option>
@@ -94,8 +92,6 @@ export const FormFuncionario = () => {
         <label>Documentos</label>
         <input
           type="file"
-          //onChange={handleFileChange}
-          multiple
           {...register("documentos", {
             required: "É obrigatório selecionar um documento",
           })}
@@ -107,7 +103,7 @@ export const FormFuncionario = () => {
       </div>
 
       <div className="form-group">
-        <button onClick={() => handleSubmit(onSubmit)()}>Enviar documento</button>
+        <button onClick={handleSubmit(onSubmit)}>Enviar documento</button>
       </div>
     </div>
   );

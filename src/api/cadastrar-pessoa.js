@@ -1,4 +1,4 @@
-import { apiClient } from ".";
+import { apiClient } from "."
 
 export const cadastrarPessoa = async ({
   nome,
@@ -19,5 +19,5 @@ export const cadastrarPessoa = async ({
       cargo,
       idade,
     },
-  });
-};
+  })
+}
