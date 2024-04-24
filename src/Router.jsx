@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
 import { Form } from "./components/Form";
 import { FormFuncionario } from "./components/FormFuncionario";
 import { FormEditarPessoa } from "./components/FormEditarPessoa";

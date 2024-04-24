@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InputMask from 'react-input-mask';
 import { Header } from './Header/index'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { apiClient } from '../api/index.js';
 
 export const FormEditarPessoa = () => {
@@ -112,6 +112,11 @@ export const FormEditarPessoa = () => {
 
         <div className="form-group">
           <button type="submit">Salvar alterações</button>
+        </div>
+        <div className="form-group">
+          <Link to="/listar-funcionario">
+            <button type="button">Cancelar operação</button>
+          </Link>
         </div>
       </form>
     </div>
