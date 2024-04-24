@@ -40,8 +40,25 @@ export const FormFuncionario = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    // Implementação da função onSubmit
-  };
+    console.log(data);
+    const formData = new FormData();
+    formData.append("tipo", data.typeDocument);
+    formData.append("idColaborador", data.pessoa);
+    formData.append("arquivo", data.documentos[0]);
+    try {
+      const response = await cadastrarFuncionario(formData);
+      const resposta = response.data;
+      if (resposta.sucesso) {
+        alert("Cadastro efetuado com sucesso!");
+        window.location.reload();
+      }
+      else {
+        alert(resposta.mensagem);
+      }
+    } catch (error) {
+      alert("Erro ao enviar a requisição para o servidor!");
+    }
+  }
 
   return (
     <div className="app-container">
