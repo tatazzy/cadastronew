@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faDownload } from '@fortawesome/free-solid-svg-icons';
 import styles from "./ListaFuncionario.module.css";
-import { listaFuncionario } from "../api/lista-funcionario";
+import { listaFuncionario } from "../api/lista-funcionario.js";
 import { Header } from "./Header";
+import { useNavigate } from 'react-router-dom';
+import { downloadDocumento, getDocumentos } from "../api/documentos.js";
 
 export function ListaFuncionario() {
+  const navigate = useNavigate();
   const [initialData, setInitialData] = useState([]);
   const [people, setPeople] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sorted, setSorted] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
   const [filteredLetter, setFilteredLetter] = useState("");
+  const [documentos, setDocumentos] = useState({});
 
   console.log("initialData", initialData);
   console.log("people", people);
@@ -35,6 +39,21 @@ export function ListaFuncionario() {
       );
     }
   }, [initialData]);
+
+  useEffect(() => {
+    const fetchDocumentos = async () => {
+      const documentosResponse = await getDocumentos();
+      const documentosMap = {};
+      if (documentosResponse?.dados) {
+        documentosResponse.dados.forEach((documento) => {
+          documentosMap[documento.idColaborador] = documento;
+        });
+      }
+      setDocumentos(documentosMap);
+    };
+
+    fetchDocumentos();
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -80,8 +99,19 @@ export function ListaFuncionario() {
   };
 
   const handleEditClick = (event, person) => {
-    // Adicione aqui a lógica para editar o funcionário
-    event.stopPropagation(); // Evita a propagação do evento de clique para a linha inteira
+    event.stopPropagation();
+    navigate(`/editar-pessoa/${person.id}`);
+  };
+
+  const handleDownloadDocument = async (event, person) => {
+    event.stopPropagation();
+    const documento = documentos[person.id];
+    if (documento) {
+      await downloadDocumento(documento.id);
+      console.log("Documento:", documento);
+    } else {
+      alert("Este funcionário não tem documento cadastrado.");
+    }
   };
 
   return (
@@ -124,6 +154,13 @@ export function ListaFuncionario() {
                   className={styles.editIcon}
                   onClick={(event) => handleEditClick(event, person)}
                 />
+                {documentos[person.id] && (
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    className={styles.downloadIcon}
+                    onClick={(event) => handleDownloadDocument(event, person)}
+                  />
+                )}
                 {expandedId === person.id && (
                   <div className={styles["details"]}>
                     {console.log("person", person)}
@@ -133,6 +170,9 @@ export function ListaFuncionario() {
                     <p>Gênero: {person.genero}</p>
                     <p>Idade: {person.idade}</p>
                     <p>Cargo: {person.cargo}</p>
+                    {documentos[person.id] && (
+                      <p>Tipo de Documento: {documentos[person.id].tipo}</p>
+                    )}
                   </div>
                 )}
               </li>
@@ -149,6 +189,13 @@ export function ListaFuncionario() {
                   className={styles.editIcon}
                   onClick={(event) => handleEditClick(event, person)}
                 />
+                {documentos[person.id] && (
+                  <FontAwesomeIcon
+                    icon={faDownload}
+                    className={styles.downloadIcon}
+                    onClick={(event) => handleDownloadDocument(event, person)}
+                  />
+                )}
                 {expandedId === person.id && (
                   <div className={styles["details"]}>
                     <p>Email: {person.email}</p>
@@ -157,6 +204,9 @@ export function ListaFuncionario() {
                     <p>Gênero: {person.genero}</p>
                     <p>Idade: {person.idade}</p>
                     <p>Cargo: {person.cargo}</p>
+                    {documentos[person.id] && (
+                      <p>Tipo de Documento: {documentos[person.id].tipo}</p>
+                    )}
                   </div>
                 )}
               </li>
