@@ -3,10 +3,12 @@ import axios from "axios";
 import InputMask from 'react-input-mask';
 import { Header } from './Header/index'
 import { useParams } from 'react-router-dom';
+import { apiClient } from '../api/index.js';
 
 export const FormEditarPessoa = () => {
   const { id } = useParams();
   const [colaborador, setColaborador] = useState({
+    id: 0,
     nome: "",
     email: "",
     telefone: "",
@@ -22,6 +24,7 @@ export const FormEditarPessoa = () => {
         const response = await axios.get(`https://localhost:7144/api/Colaborador/${id}`);
         const data = response.data.dados;
         setColaborador({
+          id: data.id,
           nome: data.nome,
           email: data.email,
           telefone: data.telefone,
@@ -48,8 +51,13 @@ export const FormEditarPessoa = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    alert("Dados atualizados com sucesso!");
-    // Adicione aqui a lógica para enviar os dados do formulário para a API de atualização
+    try {
+      await apiClient.put(`/Colaborador/${id}`, { dados: colaborador });
+      alert("Dados atualizados com sucesso!");
+    } catch (error) {
+      console.error("Erro ao atualizar dados do colaborador:", error);
+      alert("Erro ao atualizar dados do colaborador.");
+    }
   };
 
   return (
