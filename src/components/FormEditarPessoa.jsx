@@ -1,12 +1,11 @@
-
-
-// Bibliotecas incluídas via terminal
 import { useForm } from "react-hook-form";
 import validator from 'validator';
 import InputMask from 'react-input-mask';
-import {Header} from './Header/index'
+import { Header } from './Header/index'
+import { useParams } from 'react-router-dom';
 
-export const FormEditarPessoa = () => { 
+export const FormEditarPessoa = () => {
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
@@ -18,7 +17,7 @@ export const FormEditarPessoa = () => {
     console.log(data) // Teste de saída via console dos dados incluídos 
 
     // Condição que irá analisar se os dados foram validados e estão sendo enviados (caso seja verdadeiro, retornará um alerta para o usuário confirmando o envio)
-    if(data != null){
+    if (data != null) {
       alert("Cadastro efetuado com sucesso!");
     }
   };
@@ -30,7 +29,7 @@ export const FormEditarPessoa = () => {
   return (
 
     <div className="app-container">
-      <Header/>
+      <Header />
       <h1 className="header">Alterar dados</h1>
       <div className="form-group">
         <label>Nome completo</label>
@@ -44,10 +43,10 @@ export const FormEditarPessoa = () => {
           })}
         />
 
-        {errors?.name?.type == 'required' && 
+        {errors?.name?.type == 'required' &&
           <p className="error-message">O preenchimento do nome completo é obrigatório</p>}
 
-        {errors?.name?.type == 'minLength' && 
+        {errors?.name?.type == 'minLength' &&
           <p className="error-message">O nome completo precisa ter no mínimo 15 caracteres</p>}
       </div>
 
@@ -62,9 +61,9 @@ export const FormEditarPessoa = () => {
             validate: (value) => validator.isEmail(value)
           })}
         />
-        {errors?.email?.type == 'required' && 
+        {errors?.email?.type == 'required' &&
           <p className="error-message">O preenchimento do e-mail é obrigatório</p>}
-        {errors?.email?.type == 'validate' && 
+        {errors?.email?.type == 'validate' &&
           <p className="error-message">O e-mail é inválido</p>}
       </div>
 
@@ -135,7 +134,7 @@ export const FormEditarPessoa = () => {
         )}
       </div>
 
-      
+
       <div className="form-group">
         <label>Data de nascimento</label>
         <input
@@ -164,9 +163,9 @@ export const FormEditarPessoa = () => {
           className={errors?.gender && "input-error"}
         >
           <option value="0">Selecione seu gênero...</option>
-          <option value="woman">Feminino</option>
-          <option value="man">Masculino</option>
-          <option value="other">Outra</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Outro">Outra</option>
         </select>
 
         {errors?.gender?.type == 'validate' && (

@@ -4,8 +4,10 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import styles from "./ListaFuncionario.module.css";
 import { listaFuncionario } from "../api/lista-funcionario";
 import { Header } from "./Header";
+import { useNavigate } from 'react-router-dom';
 
 export function ListaFuncionario() {
+  const navigate = useNavigate();
   const [initialData, setInitialData] = useState([]);
   const [people, setPeople] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -80,8 +82,8 @@ export function ListaFuncionario() {
   };
 
   const handleEditClick = (event, person) => {
-    // Adicione aqui a lógica para editar o funcionário
-    event.stopPropagation(); // Evita a propagação do evento de clique para a linha inteira
+    event.stopPropagation();
+    navigate(`/editar-pessoa/${person.id}`);
   };
 
   return (

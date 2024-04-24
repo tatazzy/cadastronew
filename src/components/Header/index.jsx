@@ -8,22 +8,19 @@ export const Header = () => {
         <NavLink
           className="nav-link"
           to="/cadastrar-pessoa"
-          title="Cadastrar Pessoa"
+          title="Cadastrar Colaborador"
         >
-          Cadastrar Pessoa
+          Cadastrar Colaborador
         </NavLink>
         <NavLink
           className="nav-link"
           to="/cadastrar-funcionario"
-          title="Cadastrar Funcionário"
+          title="Cadastrar Documento"
         >
-          Cadastrar Funcionário
+          Cadastrar Documento
         </NavLink>
-        <NavLink className="nav-link" to="/editar-pessoa" title="Editar Pessoa">
-          Editar Pessoa
-        </NavLink>
-        <NavLink className="nav-link" to="/listar-funcionario" title="Listar funcionario">
-          Listar funcionário
+        <NavLink className="nav-link" to="/listar-funcionario" title="Listar Colaboradores">
+        Listar Colaboradores
         </NavLink>
       </nav>
     </header>
