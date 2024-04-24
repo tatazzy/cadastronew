@@ -13,6 +13,7 @@ export const Router = () => {
         <Route path="/cadastrar-funcionario" element={<FormFuncionario />} />
         <Route path="/editar-pessoa" element={<FormEditarPessoa />} />
         <Route path="/listar-funcionario" element={<ListaFuncionario />} />
+        <Route path="/" element={<Form />} />
       </Route>
     </Routes>
   );
