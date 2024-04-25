@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faDownload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import styles from "./ListaFuncionario.module.css";
 import { listaFuncionario } from "../api/lista-funcionario.js";
 import { Header } from "./Header";
 import { useNavigate } from 'react-router-dom';
-import { downloadDocumento, getDocumentos } from "../api/documentos.js";
+import { downloadDocumento, getDocumentos, deleteDocumento } from "../api/documentos.js";
 
 export function ListaFuncionario() {
   const navigate = useNavigate();
@@ -114,6 +114,20 @@ export function ListaFuncionario() {
     }
   };
 
+  const handleDeleteDocument = async (event, person) => {
+    event.stopPropagation();
+    const documento = documentos[person.id];
+    if (documento) {
+      await deleteDocumento(documento.id);
+      console.log("Documento excluído:", documento);
+      const updatedDocumentos = { ...documentos };
+      delete updatedDocumentos[person.id];
+      setDocumentos(updatedDocumentos);
+    } else {
+      alert("Este funcionário não tem documento cadastrado.");
+    }
+  };
+
   return (
     <div className="App">
       <Header />
@@ -155,11 +169,18 @@ export function ListaFuncionario() {
                   onClick={(event) => handleEditClick(event, person)}
                 />
                 {documentos[person.id] && (
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                    className={styles.downloadIcon}
-                    onClick={(event) => handleDownloadDocument(event, person)}
-                  />
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faDownload}
+                      className={styles.downloadIcon}
+                      onClick={(event) => handleDownloadDocument(event, person)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      className={styles.deleteIcon}
+                      onClick={(event) => handleDeleteDocument(event, person)}
+                    />
+                  </div>
                 )}
                 {expandedId === person.id && (
                   <div className={styles["details"]}>
@@ -190,11 +211,18 @@ export function ListaFuncionario() {
                   onClick={(event) => handleEditClick(event, person)}
                 />
                 {documentos[person.id] && (
-                  <FontAwesomeIcon
-                    icon={faDownload}
-                    className={styles.downloadIcon}
-                    onClick={(event) => handleDownloadDocument(event, person)}
-                  />
+                  <div>
+                    <FontAwesomeIcon
+                      icon={faDownload}
+                      className={styles.downloadIcon}
+                      onClick={(event) => handleDownloadDocument(event, person)}
+                    />
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      className={styles.deleteIcon}
+                      onClick={(event) => handleDeleteDocument(event, person)}
+                    />
+                  </div>
                 )}
                 {expandedId === person.id && (
                   <div className={styles["details"]}>

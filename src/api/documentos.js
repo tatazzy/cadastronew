@@ -30,3 +30,13 @@ export async function downloadDocumento(id) {
     alert('Erro ao buscar documentos!');
   }
 }
+
+export async function deleteDocumento(id) {
+  try {
+    const response = await apiClient.delete(`/Documento/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao excluir documento:', error);
+    return { sucesso: false, mensagem: 'Erro ao excluir documento' };
+  }
+}
