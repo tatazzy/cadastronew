@@ -18,6 +18,18 @@ export const FormEditarPessoa = () => {
     idade: 0
   });
 
+  function calcularIdade(dataNasc) {
+    const hoje = new Date();
+    const nascimento = new Date(dataNasc);
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mesAtual = hoje.getMonth() + 1;
+    const diaAtual = hoje.getDate();
+    if (mesAtual < nascimento.getMonth() + 1 || (mesAtual === nascimento.getMonth() + 1 && diaAtual < nascimento.getDate())) {
+      idade--;
+    }
+    return idade;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +64,7 @@ export const FormEditarPessoa = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      colaborador.idade = calcularIdade(colaborador.dataNasc);
       await apiClient.put(`/Colaborador/${id}`, { dados: colaborador });
       alert("Dados atualizados com sucesso!");
     } catch (error) {

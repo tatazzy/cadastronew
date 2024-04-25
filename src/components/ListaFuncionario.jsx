@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faDownload, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faDownload, faTrashAlt, faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import styles from "./ListaFuncionario.module.css";
 import { listaFuncionario } from "../api/lista-funcionario.js";
 import { Header } from "./Header";
 import { useNavigate } from 'react-router-dom';
 import { downloadDocumento, getDocumentos, deleteDocumento } from "../api/documentos.js";
+import { deleteColaborador } from "../api/colaboradores.js";
 
 export function ListaFuncionario() {
   const navigate = useNavigate();
@@ -120,11 +121,30 @@ export function ListaFuncionario() {
     if (documento) {
       await deleteDocumento(documento.id);
       console.log("Documento excluído:", documento);
+      alert("Documento excluído com sucesso!");
       const updatedDocumentos = { ...documentos };
       delete updatedDocumentos[person.id];
       setDocumentos(updatedDocumentos);
     } else {
       alert("Este funcionário não tem documento cadastrado.");
+    }
+  };
+
+  const handleDeleteEmployee = async (event, person) => {
+    event.stopPropagation();
+    await deleteColaborador(person.id);
+    console.log("Colaborador excluído:", person);
+    alert("Colaborador excluído com sucesso!");
+    const updatedPeople = people.filter((p) => p.id !== person.id);
+    setPeople(updatedPeople);
+    const documento = documentos[person.id];
+    if (documento) {
+      await deleteDocumento(documento.id);
+      console.log("Documento do colaborador excluído:", documento);
+      alert("Documento do colaborador excluído com sucesso!");
+      const updatedDocumentos = { ...documentos };
+      delete updatedDocumentos[person.id];
+      setDocumentos(updatedDocumentos);
     }
   };
 
@@ -194,6 +214,11 @@ export function ListaFuncionario() {
                     {documentos[person.id] && (
                       <p>Tipo de Documento: {documentos[person.id].tipo}</p>
                     )}
+                    <FontAwesomeIcon
+                      icon={faUserMinus}
+                      className={styles.deleteEmployeeIcon}
+                      onClick={(event) => handleDeleteEmployee(event, person)}
+                    />
                   </div>
                 )}
               </li>
@@ -224,6 +249,11 @@ export function ListaFuncionario() {
                     />
                   </div>
                 )}
+                <FontAwesomeIcon
+                  icon={faUserMinus}
+                  className={styles.deleteEmployeeIcon}
+                  onClick={(event) => handleDeleteEmployee(event, person)}
+                />
                 {expandedId === person.id && (
                   <div className={styles["details"]}>
                     <p>Email: {person.email}</p>
