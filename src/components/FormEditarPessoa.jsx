@@ -119,11 +119,6 @@ export const FormEditarPessoa = () => {
         </div>
 
         <div className="form-group">
-          <label>Idade</label>
-          <input type="number" name="idade" value={colaborador.idade} onChange={handleChange} min={18} />
-        </div>
-
-        <div className="form-group">
           <button type="submit">Salvar alterações</button>
         </div>
         <div className="form-group">
