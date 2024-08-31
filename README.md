@@ -1,75 +1,26 @@
-# Getting Started with Create React App
+# Cadastro de colaboradores e documentos - Front-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esse projeto tem o intuito de receber informações de cadastro de colaboradores por meio de uma API RESTFul e salva-las em um banco de dados MySql. Após o cadastro também é possível cadastrar um documento associado a esse colaborador cadastrado. O objetivo maior foi para colocar em prova as habilidades dos desenvolvedores que participaram desse projeto. Confira a API utilizada para criação do projeto aqui: [https://github.com/VictorUemura/api-for-collaborator](https://github.com/VictorUemura/api-for-collaborator);
 
-## Available Scripts
+## 🚀 Começando
 
-In the project directory, you can run:
+Teste o projeto em sua máquina seguindo as seguintes instruções:
 
-### `npm start`
+- Clone o projeto: `git clone https://github.com/VictorUemura/for-collaborator.git`;
+- Abra o projeto clonado utilizando o VS Code;
+- Execute o comando no terminal: `npm install`;
+- Execute o comando no terminal: `npm start`;
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📋 Pré-requisitos
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js Versão: 20.17.0 - Baixe em: [https://dotnet.microsoft.com/pt-br/download](https://nodejs.org/pt)
 
-### `npm test`
+## 🛠️ Construído com
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Visual Studio Code;
 
-### `npm run build`
+## ✒️ Autores
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-#formulário-de-cadastro
-# cadastronew
-# cadastronew
-#cadastro_new2
-# cadastro_new2
+- Victor Uemura - Back-end - https://github.com/VictorUemura;
+- Jefferson - Back-end - https://github.com/JeffBianchi;
+- Thatylla - Front-end - https://github.com/tatazzy;
